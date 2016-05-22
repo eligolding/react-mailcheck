@@ -2,12 +2,21 @@
   "name": "react-mailcheck",
   "version": "0.0.1",
   "description": "React component for suggesting emails",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eligolding/react-mailcheck"
+  },
+  "bugs": "https://github.com/eligolding/react-mailcheck/issues",
+  "keywords": [
+    "react",
+    "mailcheck"
+  ],
+  "author": "Eli Golding <eligolding@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "mailcheck": "^1.1.1",
     "react": "^15.0.2",
