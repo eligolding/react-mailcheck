@@ -7,6 +7,7 @@ class MailCheck extends React.Component {
 
   static propTypes = {
     email: string.isRequired,
+    children: func.isRequired,
     domains: array,
     topLevelDomains: array,
     secondLevelDomains: array,
