@@ -1,13 +1,16 @@
 import React from 'react';
 import mailcheck from 'mailcheck';
 
-const { string, array, func } = React.PropTypes;
+const { string, number, array, func } = React.PropTypes;
 
 class MailCheck extends React.Component {
 
   static propTypes = {
     email: string.isRequired,
     children: func.isRequired,
+    domainThreshold: number,
+    secondLevelThreshold: number,
+    topLevelThreshold: number,
     domains: array,
     topLevelDomains: array,
     secondLevelDomains: array,
@@ -27,7 +30,20 @@ class MailCheck extends React.Component {
   }
 
   checkEmail = (email) => {
-    const { domains, topLevelDomains, secondLevelDomains, distanceFunction } = this.props;
+    const {
+      domainThreshold,
+      secondLevelThreshold,
+      topLevelThreshold,
+      domains,
+      topLevelDomains,
+      secondLevelDomains,
+      distanceFunction
+    } = this.props;
+
+    mailcheck.domainThreshold = domainThreshold;
+    mailcheck.secondLevelThreshold = secondLevelThreshold;
+    mailcheck.topLevelThreshold = topLevelThreshold;
+
     mailcheck.run({
       email,
       domains,
