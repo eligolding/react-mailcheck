@@ -40,9 +40,9 @@ class MailCheck extends React.Component {
       distanceFunction
     } = this.props;
 
-    mailcheck.domainThreshold = domainThreshold;
-    mailcheck.secondLevelThreshold = secondLevelThreshold;
-    mailcheck.topLevelThreshold = topLevelThreshold;
+    mailcheck.domainThreshold = domainThreshold || mailcheck.domainThreshold;
+    mailcheck.secondLevelThreshold = secondLevelThreshold || mailcheck.secondLevelThreshold;
+    mailcheck.topLevelThreshold = topLevelThreshold || mailcheck.topLevelThreshold;
 
     mailcheck.run({
       email,
