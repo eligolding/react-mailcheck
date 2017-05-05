@@ -1,6 +1,6 @@
 {
   "name": "react-mailcheck",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "React component for suggesting emails",
   "main": "dist/index.js",
   "scripts": {
