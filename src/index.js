@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import mailcheck from 'mailcheck';
 
-const { string, number, array, func } = React.PropTypes;
+const { string, number, array, func } = PropTypes;
 
 class MailCheck extends React.Component {
 
