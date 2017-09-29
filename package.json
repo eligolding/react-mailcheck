@@ -21,7 +21,7 @@
   "dependencies": {
     "mailcheck": "^1.1.1",
     "prop-types": "^15.5.8",
-    "react": "^15.5.4"
+    "react": "^15.5.4 || ^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
