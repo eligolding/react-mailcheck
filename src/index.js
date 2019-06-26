@@ -1,46 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 import mailcheck from 'mailcheck';
 
-const { string, number, array, func } = PropTypes;
+function useMailCheck({
+  domainThreshold,
+  secondLevelThreshold,
+  topLevelThreshold,
+  domains,
+  topLevelDomains,
+  secondLevelDomains,
+  distanceFunction,
+  email,
+}) {
+  const [suggestion, setSuggestion] = useState(null);
 
-class MailCheck extends React.Component {
-
-  static propTypes = {
-    email: string.isRequired,
-    children: func.isRequired,
-    domainThreshold: number,
-    secondLevelThreshold: number,
-    topLevelThreshold: number,
-    domains: array,
-    topLevelDomains: array,
-    secondLevelDomains: array,
-    distanceFunction: func,
-  };
-
-  state = {
-    suggestion: null,
-  };
-
-  componentWillMount() {
-    this.checkEmail(this.props.email);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.checkEmail(nextProps.email);
-  }
-
-  checkEmail = (email) => {
-    const {
-      domainThreshold,
-      secondLevelThreshold,
-      topLevelThreshold,
-      domains,
-      topLevelDomains,
-      secondLevelDomains,
-      distanceFunction
-    } = this.props;
-
+  useEffect(() => {
     mailcheck.domainThreshold = domainThreshold || mailcheck.domainThreshold;
     mailcheck.secondLevelThreshold = secondLevelThreshold || mailcheck.secondLevelThreshold;
     mailcheck.topLevelThreshold = topLevelThreshold || mailcheck.topLevelThreshold;
@@ -51,22 +24,29 @@ class MailCheck extends React.Component {
       topLevelDomains,
       secondLevelDomains,
       distanceFunction,
-      suggested: (suggestion) => {
-        this.setState({
-          suggestion,
-        });
-      },
+      suggested: setSuggestion,
       empty: () => {
-        if (this.state.suggestion) {
-          this.setState({ suggestion: null });
-        }
+        setSuggestion(null);
       },
     });
-  }
+  }, [
+    email,
+    domainThreshold,
+    secondLevelThreshold,
+    topLevelThreshold,
+    setSuggestion,
+    distanceFunction,
+    domains,
+    secondLevelDomains,
+    topLevelDomains,
+  ]);
 
-  render() {
-    return this.props.children(this.state.suggestion);
-  }
+  return suggestion;
 }
 
-export default MailCheck;
+function MailCheck(props) {
+  const suggestion = useMailCheck(props);
+  return props.children(suggestion);
+}
+
+export { useMailCheck, MailCheck }
